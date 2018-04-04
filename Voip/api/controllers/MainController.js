@@ -1,6 +1,6 @@
 var replace = require("replace");
 var con = require("./connection.js");
-
+ 
 module.exports = {
   _config: {
   		actions:false,
@@ -64,7 +64,7 @@ same =>n,Hangup()
     res.render('homepage');
   },
   GetUsers(req,res){
-    
+
   }
 
 
