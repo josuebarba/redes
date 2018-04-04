@@ -1,0 +1,22 @@
+DOCTYPE
+html(lang="en")
+	head
+		meta(charset= "UTF-8")
+		meta(name="viewport" content= "width+device-width, initial-scale=1.0")
+		link(href="https://fonts.googleapis.com/css?family=Lato:400,900" rel= "stylesheet")
+		link(rel="stylesheet" href="styles/css/main.css")
+		title Formulario
+			
+	body
+		div.container
+			div.form__top
+				h2 Crear usuarios
+					span  Asterisk
+				form(class="form__top", action="/addUser")
+					input(class="input" name="user" type="text" placeholder="Nombre" required autofocus)
+					br
+					input(class="input" name="password" type="text" placeholder="Password" required)
+					div.btn__form
+						br
+						input(class="btn__submit" type="submit" value="REGISTRAR")
+						//input(class="btn__reset" type="reset" value="ACCEDER")
