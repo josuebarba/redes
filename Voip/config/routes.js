@@ -1,4 +1,5 @@
 /**
+/**
  * Route Mappings
  * (sails.config.routes)
  *
@@ -38,7 +39,15 @@ module.exports.routes = {
   '/addUser': {
     controller: 'MainController',
     action: 'AddUser'
+  },
+  '/historial': {
+    view: 'historial'
+  },
+   '/viewUsers': {
+    controller: 'MainController',
+    action: 'Usuarios'
   }
+
 
   /***************************************************************************
   *                                                                          *
