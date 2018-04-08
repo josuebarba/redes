@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+html
+  head
+    meta(charset='utf-8')
+    title Inicio
+    meta(name="viewport" content= "width+device-width, initial-scale=1.0") 
+    link(rel="stylesheet" type="text/css" href="/styles/css/menu.css")
+    link(href="https://fonts.googleapis.com/css?family=Lato:400,900" rel= "stylesheet")
+    link(rel="stylesheet" href="styles/css/main.css")
+    script(type="text/javascript" src="/js/dependencies/sails.io.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" )
+    script.
+      //- io.socket.on('message',function(data){
+      //-   console.log(data.proceso)
+      //- });
+      $(function(){
+        var socket = io.connect('http://localhost:1337');
+      })
+  body
+    div.header
+    - var long = datos.length
+      ul.nav
+        li
+          a.link(href= '/') Crear Usuario
+        li
+          a.link(href= '/viewUsers') Ver Usuarios      
+    br
+    div.tabla
+      br
+      br
+      table(style="width:auto;text-align:center;")
+        tr
+          th DialSIP   
+          th.el Nombre
+        -for(var i =0;i<long;i++)
+          tr
+            td #{datos[i].id_user}
+            td.el #{datos[i].nombre}
+          

@@ -7,6 +7,17 @@ module.exports = {
   		shortcuts:false,
   		rest:false
   	},
+  Usuarios(req,res)
+  {
+    con.connection.query('select * from user ',function(err,result)
+    {
+      if(err){
+        res.end(err);
+      }else{
+        res.render('historial',{datos: result});
+        }
+    });
+  },
   AddUser(req,res){
     var user = req.param('user');
     var password = req.param('password');
@@ -64,7 +75,7 @@ same =>n,Hangup()
     res.render('homepage');
   },
   GetUsers(req,res){
-    
+    var tabla ="a";
   }
 
 
