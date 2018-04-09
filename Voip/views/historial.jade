@@ -9,21 +9,19 @@ html
     link(rel="stylesheet" href="styles/css/main.css")
     script(type="text/javascript" src="/js/dependencies/sails.io.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" )
-    script.
-      //- io.socket.on('message',function(data){
-      //-   console.log(data.proceso)
-      //- });
-      $(function(){
-        var socket = io.connect('http://localhost:1337');
-      })
+    
   body
     div.header
     - var long = datos.length
       ul.nav
         li
-          a.link(href= '/') Crear Usuario
+          a.link(href= '/') Crear Usuario        
         li
-          a.link(href= '/viewUsers') Ver Usuarios      
+          a.link(href= '/modificar') Modificar Usuarios
+        li
+          a.link(href= '/eliminar') Eliminar Usuarios
+        li
+          a.link(href= '/viewUsers') Ver Usuarios
     br
     div.tabla
       br

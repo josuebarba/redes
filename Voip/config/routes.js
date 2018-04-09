@@ -46,6 +46,20 @@ module.exports.routes = {
    '/viewUsers': {
     controller: 'MainController',
     action: 'Usuarios'
+  },
+  '/updateUsers': {
+    controller: 'MainController',
+    action: 'ModifyUsers'
+  },
+  '/deleteUser':{
+    controller: 'MainController',
+    action: 'DeleteUser'
+  },
+  '/modificar' : {
+    view: 'modificar'
+  },
+  '/eliminar' : {
+    view: 'eliminar'
   }
 
 

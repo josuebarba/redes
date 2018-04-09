@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+html
+  head
+    meta(charset= "UTF-8")
+    meta(name="viewport" content= "width+device-width, initial-scale=1.0")
+    link(rel="stylesheet" type="text/css" href="/styles/css/menu.css")
+    link(href="https://fonts.googleapis.com/css?family=Lato:400,900" rel= "stylesheet")
+    link(rel="stylesheet" href="styles/css/main.css")
+    title Modificar
+
+  body
+    div.header
+      ul.nav
+        li
+          a.link(href= '/') Crear Usuario        
+        li
+          a.link(href= '/modificar') Modificar Usuarios
+        li
+          a.link(href= '/eliminar') Eliminar Usuarios
+        li
+          a.link(href= '/viewUsers') Ver Usuarios
+                  
+    br
+    div.container
+      div.form__top
+        h2 Crear usuarios
+          span  Asterisk
+        form(class="form__top", action="/DeleteUser")
+          input(class="input" name="sip" type="number" placeholder="Dial SIP | ID" required autofocus)
+          br
+          input(class="input" name="password" type="text" placeholder="Password" required)
+          br
+          
+          div.btn__form
+            br
+            input(class="btn__submit" type="submit" value="MODIFICAR")
+          div
+            h2 #{error}
+            //input(class="btn__reset" type="reset" value="ACCEDER")
