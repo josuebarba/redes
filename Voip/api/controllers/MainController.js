@@ -1,5 +1,6 @@
 var replace = require("replace");
 var con = require("./connection.js");
+var fs = require("fs");
 
 module.exports = {
   _config: {
@@ -74,8 +75,105 @@ same =>n,Hangup()
 
     res.render('homepage');
   },
-  GetUsers(req,res){
-    var tabla ="a";
+  ModifyUsers(req,res){
+    var f = true;
+    var r = 'caquita';
+    var str = '';
+
+    con.connection.query("select * from user where id_user =" +req.param("sip"),function(err,userResult){
+      if(err){
+        console.log(err);
+      }else{
+        // str = "/["+req.param("sip")+"]/";
+        str = `[`+req.param("sip")+`]
+type=friend
+secret=`+req.param("oldPassword")+`
+host=dynamic
+context=ext_internas
+callerid="`+userResult[0].nombre+`"<`+req.param("sip")+`>
+dtmfmode=rfc2833
+qualify=yes`;
+        if(req.param("oldPassword")==userResult[0].password){
+          con.connection.query("UPDATE user set nombre ='"+req.param("user")+"', password ='"+req.param("password")+"' where id_user=" +req.param("sip"), function(err,result){
+            if(err){
+              console.log(err);
+            }else{
+              console.log(str);
+
+              fs.readFile('../../../../../etc/asterisk/sip.conf','utf8', function(errr,data){
+                if(errr){
+                  console.log(errr);
+                }
+                var r =`[`+req.param("sip")+`]
+type=friend
+secret=`+req.param("password")+`
+host=dynamic
+context=ext_internas
+callerid="`+req.param("user")+`"<`+req.param("sip")+`>
+dtmfmode=rfc2833
+qualify=yes`;
+                var result = data.replace(str,r);
+                fs.writeFile('../../../../../etc/asterisk/sip.conf',result,'utf8',function(err){
+                  if(err) {
+                    console.log(err);
+                  }
+                })
+              });
+              res.render('modificar',{error: "Modificado exitosamente"});
+            }
+          });
+        }else{
+          res.render('modificar',{error: "Contrasena incorrecta"});
+        }
+      }
+    });
+
+
+
+
+  },
+  DeleteUser(req,res){
+
+    con.connection.query("select * from user where id_user =" +req.param("sip"),function(err,userResult){
+      if(err){
+        console.log(err);
+      }else{
+        if(userResult[0].password==req.param("password")){
+          con.connection.query("Delete from user where id_user ="+req.param("sip"),function(err,result){
+            if(err){
+              console.log(err);
+            }else{
+              fs.readFile('../../../../../etc/asterisk/sip.conf','utf8', function(errr,data){
+                if(errr){
+                  console.log(errr);
+                }
+                var str = `[`+req.param("sip")+`]
+type=friend
+secret=`+req.param("password")+`
+host=dynamic
+context=ext_internas
+callerid="`+userResult[0].nombre+`"<`+req.param("sip")+`>
+dtmfmode=rfc2833
+qualify=yes`;
+                var r ='';
+                console.log(str);
+                var result = data.replace(str,r);
+                fs.writeFile('../../../../../etc/asterisk/sip.conf',result,'utf8',function(err){
+                  if(err) {
+                    console.log(err);
+                  }
+                });
+                res.render('eliminar',{error: "Usuario eliminado"});
+            });
+          }
+        });
+      }else{
+          res.render('eliminar',{error: "Contrasena incorrecta"});
+        }
+      }
+    });
+
+
   }
 
 
